@@ -1,0 +1,503 @@
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+<style>
+     *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+        color: white;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .navbar{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        background-color: rgb(13, 68, 13);
+        color: white;
+    }
+    .main-container{
+        height: 70vh;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        width:"100%";
+    }
+
+    a{
+        color: white;
+    }
+    .header>button:hover{
+        background-color: rgb(7, 7, 7);
+        color: white; 
+    }
+    .left-swap{
+        height: 90vh;
+        width: 200px;
+        background-color: rgb(13, 68, 13);
+        position: relative;
+        top: -40px;
+    }
+    .right-swap{
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        position: relative;
+        bottom: 100px;
+    }
+
+    .right-swap>div{
+        border: 1px solid rgb(13, 68, 13);
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+    .sidebar-header{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+
+    }
+    .img-header{
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        border: 3px solid white;
+        overflow: hidden;
+    }
+    .img-header img{
+        width: 100%;
+        height: 100%;
+    }
+    .imageContainer{
+        height: 150px;
+        width: 150px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    #imageContainer img {
+    width: 30%;
+    height: 30%;
+    object-fit: cover; /* Adjust the object-fit property as needed */
+}
+.upload-predict{
+    height: 40px;
+    width: 150px;
+    background-color: rgb(73, 153, 73);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.right-wrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    /* #imageContainer img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    } */
+</style>
+<body>
+    <div class="navbar">
+        <div class="left-container">
+            <h1>Diagonosis <span style="font-weight: 100;font-size: 20px;">(Admin)</span></h1>
+        </div>
+        <div class="right-container">
+            <div class="logout">
+                <a href="">logout</a>
+            </div>
+        </div>
+     </div>
+     <div class="header" style="width: 100%;display: flex;justify-content: flex-end;margin: 20px 20px 20px 0;padding:0 40px;">
+      <a href="{{ url_for('addDoctor') }}">  <button style="padding: 10px;outline: none;padding: 10px;background-color: green;color: white;cursor: pointer;border: none;border-radius: 10px;" >Add Doctor</button></a>
+     </div>
+     <div class="main-container">
+        <div class="left-swap">
+            <div class="sidebar-header">
+                <div class="label">Mike</div>
+                <div class="img-header">
+                    <img src="" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="right-swap">
+            <div class="right-wrapper" style="border-color: lightgray;border-radius: 10px;height: 400px;margin-top: 200px;width: 80vw;">
+                <form>
+                    <div id="imageContainer">
+                        <img src="" alt="" id="imo">
+                    </div>
+                    <input type="file" id="fileInput" name="fileInput" accept="image/*" onchange="uploadImage()">
+                    <button class="upload-predict">Upload And Predict</button>
+                </form>
+            </div>
+         
+            
+        </div>
+
+     </div>
+</body>
+<script>
+    function uploadImage() {
+        const fileInput = document.getElementById('fileInput');
+        const files = fileInput.files;
+        if (files.length === 0) {
+            alert('Please select an image file to upload.');
+            return;
+        }
+        const file = files[0];
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const imageUrl = event.target.result;
+            const image = document.getElementById('imo');
+            image.src = imageUrl;
+            document.getElementById('imageContainer').innerHTML = '';
+            document.getElementById('imageContainer').appendChild(image);
+        };
+        reader.readAsDataURL(file);
+    }
+</script>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+      }
+      table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+a {
+    text-decoration: none;
+    color: coral;
+}
+
+a:hover {
+    color: crimson;
+}
+      .navbar {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        background-color: rgb(13, 68, 13);
+        color: white;
+      }
+
+      .main-container {
+        height: 70vh;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        width: 100%;
+      }
+
+      a {
+        color: white;
+      }
+
+      .header > button:hover {
+        background-color: rgb(7, 7, 7);
+        color: white;
+      }
+
+      .left-swap {
+        height: 90vh;
+        width: 300px;
+        background-color: rgb(13, 68, 13);
+        position: relative;
+        top: 20px;
+
+      }
+
+      .right-swap {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        position: relative;
+        width: 100%; /* Added width property */
+        gap: 20px;
+      }
+
+      /* .right-swap > div {
+        border: 1px solid rgb(13, 68, 13);
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      } */
+
+      .sidebar-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .img-header {
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        border: 3px solid white;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .img-header img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .imageContainer {
+        height: 150px;
+        width: 150px;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      #imageContainer img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover; /* Adjust the object-fit property as needed */
+      }
+
+      .upload-predict {
+        height: 40px;
+        width: 150px;
+        background-color: rgb(73, 153, 73);
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+
+      /* .card{
+        width: 250px;
+        border: 1px solid rgb(73, 153, 73);
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 40px;
+      }
+
+      .card p{
+        font-size: xx-large;
+      } */
+
+      .right-wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      /* .outer{
+        display: flex;
+        gap: 20px;
+      } */
+      .outer {
+    display: flex;
+   gap: 40px;
+    margin-top: 20px;
+}
+
+.card-container {
+    width: 200px;
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+.card-container:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 18px;
+    color: #333;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="left-container">
+        <h1>
+          Diagnosis
+          <span style="font-weight: 100; font-size: 20px">(Doctor)</span>
+        </h1>
+      </div>
+      <div class="right-container">
+        <div class="logout">
+          <a href="{{url_for('doctorLogout')}}">Logout</a>
+        </div>
+      </div>
+    </div>
+    <div
+      class="header"
+      style="
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin: 20px 20px 20px 0;
+        padding: 0 40px;
+      "
+    >
+   
+    </div>
+    <div class="main-container">
+      <div class="left-swap">
+        <div class="sidebar-header">
+          <div class="label">Doctor</div>
+          <div class="img-header">
+            {% if user %}
+            <img src="{{ url_for('static', filename='uploads/' + user.images) }}" alt="" />
+            {% endif %}
+            <img src="" alt="" />
+          </div>
+        </div>
+        <div class="bottom-sec" style="display: flex;flex-direction: column;
+        gap: 40px;margin-left: 40px;margin-top: 20px;">
+          <div class="outer">
+            <a href="{{url_for('doctorHomePage')}}">Home</a>
+          </div>
+          
+         
+        </div>
+      </div>
+      <div class="right-swap" style="display: flex;flex-direction: column;">
+        <!-- <div
+          class="right-wrapper"
+          style="
+            border-color: lightgray;
+            border-radius: 10px;
+            height: 400px;
+            margin-top: 200px;
+            width: 70vw;
+          "
+        >
+      
+        </div> -->
+        <div class="outer">
+            <div class="card-container" >
+                <div class="card">
+                    <h1>Approved</h1>
+                    <p>{% if total_rejected_diseases %} {{total_approved_diseases}} {% endif%}</p>
+                </div>
+              </div>
+              <div class="card-container">
+                <div class="card">
+                    <h1>Rejected</h1>
+                    <p>{% if total_rejected_diseases %} {{total_rejected_diseases}} {% endif%}</p>
+                </div>
+              </div>
+        </div>
+        
+        <div class="right-wrapper" >
+         
+          <h3 style="color: black;padding-left: 10px;">Appointment list</h3>
+          <table>
+            <tr >
+                <th>Sl no</th>
+                <th>Patient's name</th>
+                <th>Disease</th>
+                <th>Status</th>
+                <th>Action</th>
+
+            </tr>
+            {% for item in data %}
+            <tr align="center">
+                <td>{{loop.index}}</td>
+                <td>{{item.patientName}}</td>
+                <td >{{item.disease}}</td>
+                <td> {% if item.status %}
+                  Approved
+              {% else %}
+                  Pending
+              {% endif %}</td>
+                <td style="padding-left: 10px;cursor: pointer;">
+                <a href="{{ url_for('detailedDoctorDisease', id=item.id) }}"><svg xmlns="http://www.w3.org/2000/svg" fill="coral" height="20px" viewBox="0 0 576 512" ><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg></a>
+                </td>
+            </tr>
+            {% endfor %}
+         
+        </table>
+ 
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function uploadImage() {
+      const fileInput = document.getElementById("fileInput");
+      const files = fileInput.files;
+      if (files.length === 0) {
+        alert("Please select an image file to upload.");
+        return;
+      }
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const imageUrl = event.target.result;
+        const image = document.getElementById("imo");
+        image.src = imageUrl;
+        document.getElementById("imageContainer").innerHTML = "";
+        document.getElementById("imageContainer").appendChild(image);
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</html>
